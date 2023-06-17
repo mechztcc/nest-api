@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { User } from '../../entities/user.entity';
 
 @Injectable()
 export class FindAllUsersServiceService {
@@ -10,8 +10,26 @@ export class FindAllUsersServiceService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async execute(): Promise<User[]> {
-    const users = await this.usersRepository.find();
-    return users;
+  async execute(limit: number, page: number): Promise<any> {
+    const offset = page * limit - limit;
+    const [users, total] = await this.usersRepository
+      .createQueryBuilder('users')
+      .offset(offset)
+      .take(limit)
+      .getManyAndCount();
+
+    const totalPages = total / limit;
+    const next = total / limit > page ? page++ : 1;
+
+    const pagination = {
+      totalItems: total,
+      totalPages: Number(totalPages.toFixed(0)),
+      page: Number(page),
+      nextPage: next,
+      itemsPerPage: limit,
+      data: users,
+    };
+
+    return pagination;
   }
 }
