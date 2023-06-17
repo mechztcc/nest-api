@@ -22,11 +22,11 @@ export class FindAllUsersServiceService {
     const next = total / limit > page ? page++ : 1;
 
     const pagination = {
-      totalItems: total,
-      totalPages: Number(totalPages.toFixed(0)),
-      page: Number(page),
-      nextPage: next,
-      itemsPerPage: limit,
+      totalItems: total ?? 0,
+      totalPages: Number(totalPages.toFixed(0)) ?? 0,
+      page: Number(page) ?? 0,
+      nextPage: next ?? 0,
+      itemsPerPage: limit ?? 0,
       data: users,
     };
 
