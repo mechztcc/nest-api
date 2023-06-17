@@ -18,7 +18,7 @@ export class User {
   document: string;
 
   @Column({ nullable: false })
-  password: boolean;
+  password: string;
 
   @CreateDateColumn()
   created_at: Date;
