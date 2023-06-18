@@ -4,6 +4,7 @@ import { AccountModule } from './modules/account/account.module';
 import { BankAccount } from './modules/account/entities/bank-account.entity';
 import { User } from './modules/users/entities/user.entity';
 import { UsersModule } from './modules/users/users.module';
+import { PixModule } from './modules/pix/pix.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from './modules/users/users.module';
       entities: [User, BankAccount],
       synchronize: false,
     }),
+    PixModule,
   ],
   controllers: [],
   providers: [],
