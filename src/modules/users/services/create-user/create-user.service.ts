@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../../dto/create-user-dto/create-user-dto';
@@ -6,6 +6,7 @@ import { User } from '../../entities/user.entity';
 
 import * as bcrypt from 'bcrypt';
 import { BankAccount } from 'src/modules/account/entities/bank-account.entity';
+import { CreateBankAccountService } from 'src/modules/account/services/create-bank-account/create-bank-account.service';
 
 @Injectable()
 export class CreateUserService {
@@ -13,8 +14,8 @@ export class CreateUserService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
 
-    @InjectRepository(BankAccount)
-    private accountRepository: Repository<BankAccount>,
+    @Inject(CreateBankAccountService)
+    private readonly createAccountService: CreateBankAccountService,
   ) {}
 
   async execute({ document, name, password }: CreateUserDto): Promise<User> {
@@ -26,6 +27,7 @@ export class CreateUserService {
       password: hashedPass,
     });
     await this.usersRepository.save(user);
+    await this.createAccountService.execute(user.id);
 
     return user;
   }

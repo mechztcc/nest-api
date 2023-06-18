@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { FindAllUsersServiceService } from './services/find-all-users-service/find-all-users-service.service';
 import { FindByIdServiceService } from './services/find-by-id-service/find-by-id-service.service';
 import { BankAccount } from '../account/entities/bank-account.entity';
+import { AccountModule } from '../account/account.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, BankAccount])],
+  imports: [AccountModule, TypeOrmModule.forFeature([User, BankAccount])],
   controllers: [UsersController],
   providers: [
     CreateUserService,

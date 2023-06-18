@@ -8,7 +8,8 @@ import { FindByUserService } from './services/find-by-user/find-by-user.service'
 
 @Module({
   imports: [TypeOrmModule.forFeature([BankAccount, User])],
-  providers: [CreateBankAccountService, FindByUserService],
+  providers: [CreateBankAccountService, FindByUserService, BankAccount],
   controllers: [AccountController],
+  exports: [CreateBankAccountService, BankAccount],
 })
 export class AccountModule {}

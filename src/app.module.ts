@@ -8,6 +8,7 @@ import { UsersModule } from './modules/users/users.module';
 @Module({
   imports: [
     UsersModule,
+    AccountModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -18,7 +19,6 @@ import { UsersModule } from './modules/users/users.module';
       entities: [User, BankAccount],
       synchronize: false,
     }),
-    AccountModule,
   ],
   controllers: [],
   providers: [],
