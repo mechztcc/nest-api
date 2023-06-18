@@ -1,11 +1,8 @@
-import { User } from '../../users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   Generated,
-  JoinColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -19,13 +16,11 @@ export class TransactionHistoryEntity {
   @Generated('uuid')
   code: string;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  shipper: User;
+  @Column()
+  shipperAccountCode: string;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  receiver: User;
+  @Column()
+  receiverAccountCode: string;
 
   @Column()
   value: number;

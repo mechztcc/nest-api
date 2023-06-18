@@ -5,6 +5,7 @@ import { BankAccount } from './modules/account/entities/bank-account.entity';
 import { User } from './modules/users/entities/user.entity';
 import { UsersModule } from './modules/users/users.module';
 import { PixModule } from './modules/pix/pix.module';
+import { TransactionHistoryEntity } from './modules/pix/entities/transaction-history.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { PixModule } from './modules/pix/pix.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DATABASE,
-      entities: [User, BankAccount],
+      entities: [User, BankAccount, TransactionHistoryEntity],
       synchronize: false,
     }),
     PixModule,

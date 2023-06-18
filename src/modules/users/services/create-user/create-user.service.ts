@@ -5,7 +5,6 @@ import { CreateUserDto } from '../../dto/create-user-dto/create-user-dto';
 import { User } from '../../entities/user.entity';
 
 import * as bcrypt from 'bcrypt';
-import { BankAccount } from 'src/modules/account/entities/bank-account.entity';
 import { CreateBankAccountService } from 'src/modules/account/services/create-bank-account/create-bank-account.service';
 
 @Injectable()
