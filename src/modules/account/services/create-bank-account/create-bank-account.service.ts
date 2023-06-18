@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/modules/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { BankAccount } from '../../entities/bank-account.entity';
-import { User } from 'src/modules/users/entities/user.entity';
 
 @Injectable()
 export class CreateBankAccountService {
@@ -15,6 +19,17 @@ export class CreateBankAccountService {
 
   async execute(id: number): Promise<BankAccount> {
     const userExists = await this.usersRepository.findOneBy({ id: id });
+    if (!userExists) {
+      throw new NotFoundException('User not found.');
+    }
+
+    const accountExists = await this.accountsRepository.findOneBy({
+      user: { id: userExists.id },
+    });
+
+    if (accountExists) {
+      throw new ConflictException('User already has an account.');
+    }
 
     const account = this.accountsRepository.create({ user: userExists });
     this.accountsRepository.save(account);

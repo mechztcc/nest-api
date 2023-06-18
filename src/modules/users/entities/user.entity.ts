@@ -1,7 +1,9 @@
+import { BankAccount } from 'src/modules/account/entities/bank-account.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -16,6 +18,9 @@ export class User {
 
   @Column({ nullable: false })
   document: string;
+
+  @OneToOne(() => BankAccount)
+  user: BankAccount;
 
   @Column({ nullable: false })
   password: string;

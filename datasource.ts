@@ -11,7 +11,7 @@ const data = new DataSource({
   database: process.env.DATABASE,
   entities: [__dirname + '/src/modules/**/entities/**.ts'],
   migrations: [__dirname + '/src/shared/migrations/**.ts'],
-  migrationsRun: true,
+  migrationsRun: false,
 });
 
 export default data;
