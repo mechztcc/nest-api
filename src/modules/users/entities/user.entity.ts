@@ -1,4 +1,4 @@
-import { BankAccount } from 'src/modules/account/entities/bank-account.entity';
+import { BankAccount } from '../../account/entities/bank-account.entity';
 import {
   Column,
   CreateDateColumn,
@@ -20,7 +20,7 @@ export class User {
   document: string;
 
   @OneToOne(() => BankAccount)
-  user: BankAccount;
+  account: BankAccount;
 
   @Column({ nullable: false })
   password: string;

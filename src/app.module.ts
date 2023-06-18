@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './modules/users/users.module';
-import { User } from './modules/users/entities/user.entity';
 import { AccountModule } from './modules/account/account.module';
 import { BankAccount } from './modules/account/entities/bank-account.entity';
+import { User } from './modules/users/entities/user.entity';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -22,7 +20,7 @@ import { BankAccount } from './modules/account/entities/bank-account.entity';
     }),
     AccountModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

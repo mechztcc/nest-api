@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateBankAccount1687084866467 implements MigrationInterface {
-  name = 'CreateBankAccount1687084866467';
+export class CreateBankAccount1687085890614 implements MigrationInterface {
+  name = 'CreateBankAccount1687085890614';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
