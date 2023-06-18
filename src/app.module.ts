@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/entities/user.entity';
+import { AccountModule } from './modules/account/account.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { User } from './modules/users/entities/user.entity';
       entities: [User],
       synchronize: true,
     }),
+    AccountModule,
   ],
   controllers: [AppController],
   providers: [AppService],

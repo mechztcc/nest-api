@@ -9,6 +9,12 @@ import { FindByIdServiceService } from './services/find-by-id-service/find-by-id
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
-  providers: [CreateUserService, User, FindAllUsersServiceService, FindByIdServiceService],
+  providers: [
+    CreateUserService,
+    User,
+    FindAllUsersServiceService,
+    FindByIdServiceService,
+  ],
+  exports: [User],
 })
 export class UsersModule {}
