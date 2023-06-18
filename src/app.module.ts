@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/entities/user.entity';
 import { AccountModule } from './modules/account/account.module';
+import { BankAccount } from './modules/account/entities/bank-account.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { AccountModule } from './modules/account/account.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DATABASE,
-      entities: [User],
+      entities: [User, BankAccount],
       synchronize: true,
     }),
     AccountModule,
