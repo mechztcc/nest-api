@@ -16,7 +16,7 @@ import { UsersModule } from './modules/users/users.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DATABASE,
       entities: [User, BankAccount],
-      synchronize: true,
+      synchronize: false,
     }),
     AccountModule,
   ],

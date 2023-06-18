@@ -19,6 +19,9 @@ export class BankAccount {
   @Generated('uuid')
   code: string;
 
+  @Column({ default: 0 })
+  balance: number;
+
   @OneToOne(() => User)
   @JoinColumn()
   user: User;

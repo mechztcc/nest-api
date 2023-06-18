@@ -1,14 +1,14 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateBankAccount1687085890614 implements MigrationInterface {
-  name = 'CreateBankAccount1687085890614';
+export class CreateTables1687104544592 implements MigrationInterface {
+  name = 'CreateTables1687104544592';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `CREATE TABLE "user" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "document" character varying NOT NULL, "password" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
-      `CREATE TABLE "bank_account" ("id" SERIAL NOT NULL, "code" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "userId" integer, CONSTRAINT "REL_c2ba1381682b0291238cbc7a65" UNIQUE ("userId"), CONSTRAINT "PK_f3246deb6b79123482c6adb9745" PRIMARY KEY ("id"))`,
+      `CREATE TABLE "bank_account" ("id" SERIAL NOT NULL, "code" uuid NOT NULL DEFAULT uuid_generate_v4(), "balance" integer NOT NULL DEFAULT '0', "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "userId" integer, CONSTRAINT "REL_c2ba1381682b0291238cbc7a65" UNIQUE ("userId"), CONSTRAINT "PK_f3246deb6b79123482c6adb9745" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
       `ALTER TABLE "bank_account" ADD CONSTRAINT "FK_c2ba1381682b0291238cbc7a65d" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,

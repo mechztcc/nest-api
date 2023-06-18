@@ -11,6 +11,8 @@ export class FindByIdServiceService {
   ) {}
 
   async execute(id: number): Promise<User> {
+    console.log(id);
+
     const user = await this.usersRepository.findOneBy({ id: id });
     if (!user) {
       throw new NotFoundException('User not found.');
