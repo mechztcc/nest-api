@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { BankAccount } from 'src/modules/account/entities/bank-account.entity';
 import { User } from 'src/modules/users/entities/user.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { MakeTransferDto } from '../../dto/make-transfer-dto/make-transfer-dto';
 import { TransactionHistoryEntity } from '../../entities/transaction-history.entity';
 
@@ -19,6 +19,8 @@ export class MakeTransferService {
     @InjectRepository(User) private usersRepository: Repository<User>,
     @InjectRepository(BankAccount)
     private accountRepository: Repository<BankAccount>,
+
+    private dataSource: DataSource,
   ) {}
 
   async execute(data: MakeTransferDto) {
@@ -36,15 +38,14 @@ export class MakeTransferService {
       throw new NotFoundException('Account not found');
     }
 
-    console.log(shipper, receiver);
-
     if (shipper.balance < data.value) {
       throw new ConflictException(
         'Account bank account does not have enough balance',
       );
     }
 
-    shipper.balance = shipper.balance - data.value;
+    shipper.balance += data.value;
+    receiver.balance += data.value;
 
     const transaction = this.transactionRepository.create({
       shipperAccountCode: data.shipperCode,
@@ -53,9 +54,13 @@ export class MakeTransferService {
       status: 'done',
     });
 
-    await this.transactionRepository.save(transaction);
-    await this.accountRepository.save(shipper);
-    await this.accountRepository.save(receiver);
+    this.accountRepository.manager.transaction(
+      async (transactionalEntityManager) => {
+        await transactionalEntityManager.save(transaction);
+        await transactionalEntityManager.save(shipper);
+        await transactionalEntityManager.save(receiver);
+      },
+    );
 
     return transaction;
   }
