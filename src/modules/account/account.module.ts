@@ -5,10 +5,11 @@ import { CreateBankAccountService } from './services/create-bank-account/create-
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BankAccount } from './entities/bank-account.entity';
 import { FindByUserService } from './services/find-by-user/find-by-user.service';
+import { BalanceUserService } from './services/balance-user/balance-user.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([BankAccount, User])],
-  providers: [CreateBankAccountService, FindByUserService, BankAccount],
+  providers: [CreateBankAccountService, FindByUserService, BankAccount, BalanceUserService],
   controllers: [AccountController],
   exports: [CreateBankAccountService, BankAccount],
 })
