@@ -6,6 +6,7 @@ import { User } from './modules/users/entities/user.entity';
 import { UsersModule } from './modules/users/users.module';
 import { PixModule } from './modules/pix/pix.module';
 import { TransactionHistoryEntity } from './modules/pix/entities/transaction-history.entity';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TransactionHistoryEntity } from './modules/pix/entities/transaction-his
       synchronize: false,
     }),
     PixModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

@@ -15,7 +15,11 @@ import { HistoryUserService } from './services/history-user/history-user.service
     AccountModule,
     TypeOrmModule.forFeature([User, BankAccount, TransactionHistoryEntity]),
   ],
-  providers: [MakeTransferService, TransactionHistoryEntity, HistoryUserService],
+  providers: [
+    MakeTransferService,
+    TransactionHistoryEntity,
+    HistoryUserService,
+  ],
   controllers: [PixController],
   exports: [TransactionHistoryEntity],
 })

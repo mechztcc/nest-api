@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../../dto/create-user-dto/create-user-dto';
@@ -18,6 +18,14 @@ export class CreateUserService {
   ) {}
 
   async execute({ document, name, password }: CreateUserDto): Promise<User> {
+    const userExists = await this.usersRepository.findOne({
+      where: { document: document },
+    });
+
+    if (userExists) {
+      throw new UnauthorizedException('User already registered');
+    }
+
     const hashedPass = await bcrypt.hash(password, 10);
 
     const user = this.usersRepository.create({
