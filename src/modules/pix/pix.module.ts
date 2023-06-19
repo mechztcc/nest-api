@@ -7,6 +7,7 @@ import { User } from '../users/entities/user.entity';
 import { BankAccount } from '../account/entities/bank-account.entity';
 import { AccountModule } from '../account/account.module';
 import { TransactionHistoryEntity } from './entities/transaction-history.entity';
+import { HistoryUserService } from './services/history-user/history-user.service';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { TransactionHistoryEntity } from './entities/transaction-history.entity'
     AccountModule,
     TypeOrmModule.forFeature([User, BankAccount, TransactionHistoryEntity]),
   ],
-  providers: [MakeTransferService, TransactionHistoryEntity],
+  providers: [MakeTransferService, TransactionHistoryEntity, HistoryUserService],
   controllers: [PixController],
   exports: [TransactionHistoryEntity],
 })

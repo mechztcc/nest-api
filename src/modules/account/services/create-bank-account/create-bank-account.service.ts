@@ -31,7 +31,10 @@ export class CreateBankAccountService {
       throw new ConflictException('User already has an account.');
     }
 
-    const account = this.accountsRepository.create({ user: userExists });
+    const account = this.accountsRepository.create({
+      user: userExists,
+      balance: 1000,
+    });
     this.accountsRepository.save(account);
     return account;
   }

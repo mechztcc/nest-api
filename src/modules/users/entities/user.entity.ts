@@ -19,7 +19,7 @@ export class User {
   @Column({ nullable: false })
   document: string;
 
-  @OneToOne(() => BankAccount)
+  @OneToOne(() => BankAccount, (account) => account.user)
   account: BankAccount;
 
   @Column({ nullable: false })

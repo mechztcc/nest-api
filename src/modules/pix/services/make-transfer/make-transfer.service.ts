@@ -44,7 +44,7 @@ export class MakeTransferService {
       );
     }
 
-    shipper.balance += data.value;
+    shipper.balance -= data.value;
     receiver.balance += data.value;
 
     const transaction = this.transactionRepository.create({

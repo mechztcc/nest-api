@@ -22,7 +22,7 @@ export class BankAccount {
   @Column({ default: 0 })
   balance: number;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, (user) => user.account)
   @JoinColumn()
   user: User;
 
