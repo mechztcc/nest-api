@@ -10,11 +10,14 @@ import { User } from 'src/modules/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateSessionDto } from '../../dto/create-session/create-session-dto';
 import auth from '../../../../configs/auth';
+import { BankAccount } from 'src/modules/account/entities/bank-account.entity';
 
 @Injectable()
 export class CreateSessionService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
+    @InjectRepository(BankAccount)
+    private accountRepository: Repository<BankAccount>,
   ) {}
 
   async execute(data: CreateSessionDto): Promise<any> {
@@ -33,11 +36,15 @@ export class CreateSessionService {
       );
     }
 
+    const account = await this.accountRepository.findOne({
+      where: { user: { id: userExists.id } },
+    });
+
     const token = sign({}, auth.jwt.secret, {
       subject: String(userExists.id),
       expiresIn: auth.jwt.expiresIn,
     });
 
-    return { token };
+    return { token: token, name: userExists.name, balance: account.balance };
   }
 }
