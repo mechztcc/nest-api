@@ -28,7 +28,7 @@ export class HistoryUserService {
 
     const account = await this.accountRepository.findOne({
       where: { user: { id: userExists.id } },
-      relations: ['user'],
+      relations: { user: { account: true } },
     });
 
     const history = await this.transactionRepository.find({
@@ -37,8 +37,6 @@ export class HistoryUserService {
         { receiverAccountCode: account.code },
       ],
     });
-
-    console.log(history);
 
     return history;
   }
