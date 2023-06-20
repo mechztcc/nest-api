@@ -45,6 +45,11 @@ export class CreateSessionService {
       expiresIn: auth.jwt.expiresIn,
     });
 
-    return { token: token, name: userExists.name, balance: account.balance };
+    return {
+      token: token,
+      name: userExists.name,
+      balance: account.balance,
+      accountCode: account.code,
+    };
   }
 }
