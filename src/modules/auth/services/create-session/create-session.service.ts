@@ -50,6 +50,7 @@ export class CreateSessionService {
       name: userExists.name,
       balance: account.balance,
       accountCode: account.code,
+      userId: userExists.id,
     };
   }
 }
