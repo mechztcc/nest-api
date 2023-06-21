@@ -17,6 +17,7 @@ export class MakeTransferService {
     private transactionRepository: Repository<TransactionHistoryEntity>,
 
     @InjectRepository(User) private usersRepository: Repository<User>,
+
     @InjectRepository(BankAccount)
     private accountRepository: Repository<BankAccount>,
 

@@ -3,6 +3,7 @@ import { CreateBankAccountService } from '../../services/create-bank-account/cre
 import { CreateBankAccountDto } from '../../dto/create-bank-account-dto';
 import { FindByUserService } from '../../services/find-by-user/find-by-user.service';
 import { BalanceUserService } from '../../services/balance-user/balance-user.service';
+import { IndexService } from '../../services/index/index.service';
 
 @Controller('account')
 export class AccountController {
@@ -10,6 +11,7 @@ export class AccountController {
     private createAccountService: CreateBankAccountService,
     private findAccountByUser: FindByUserService,
     private balanceUserService: BalanceUserService,
+    private indexAccountService: IndexService,
   ) {}
 
   @Post()
@@ -17,6 +19,13 @@ export class AccountController {
     const account = await this.createAccountService.execute(
       createAccountDto.userId,
     );
+    return account;
+  }
+
+  @Get()
+  async index() {
+    const account = await this.indexAccountService.execute();
+
     return account;
   }
 
