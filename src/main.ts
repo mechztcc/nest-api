@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.use(pagination);
-  await app.listen(3000);
+  app.enableCors();
+  await app.listen(3333);
 }
 bootstrap();

@@ -10,7 +10,13 @@ import { IndexService } from './services/index/index.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([BankAccount, User])],
-  providers: [CreateBankAccountService, FindByUserService, BankAccount, BalanceUserService, IndexService],
+  providers: [
+    CreateBankAccountService,
+    FindByUserService,
+    BankAccount,
+    BalanceUserService,
+    IndexService,
+  ],
   controllers: [AccountController],
   exports: [CreateBankAccountService, BankAccount],
 })
