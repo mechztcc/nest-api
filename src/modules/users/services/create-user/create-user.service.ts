@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from '../../dto/create-user-dto/create-user-dto';
 import { User } from '../../entities/user.entity';
 
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { CreateBankAccountService } from 'src/modules/account/services/create-bank-account/create-bank-account.service';
 
 @Injectable()

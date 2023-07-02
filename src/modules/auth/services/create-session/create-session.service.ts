@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { User } from 'src/modules/users/entities/user.entity';
 import { Repository } from 'typeorm';
